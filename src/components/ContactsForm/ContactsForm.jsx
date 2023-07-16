@@ -12,13 +12,13 @@ const ContactsForm = () => {
     dispatch(addContacts(values));
   };
 
-  const defaultValue = {
+  const initialValues = {
     name: '',
     phone: '',
   };
 
   return (
-    <Formik initialValues={defaultValue} onSubmit={handleSubmit}>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       <StyledForm>
         <Label htmlFor="name">
           Name
