@@ -22,6 +22,6 @@ export const handleAdd = (state, action) => {
 export const handleDelete = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  const index = state.items.findIndex(contact => contact.id === action.payload);
+  const index = state.items.findIndex(item => item.id === action.payload.id);
   state.items.splice(index, 1);
 };

@@ -23,7 +23,7 @@ const ContactsForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectFilteredContacts);
 
-  const handleSubmit = values => {
+  const handleSubmit = (values, { resetForm }) => {
     const inContactList = contacts.some(
       ({ name }) => name.toLowerCase() === values.name.toLowerCase()
     );
@@ -33,6 +33,8 @@ const ContactsForm = () => {
       return;
     }
     dispatch(addContacts(values));
+
+    resetForm();
   };
 
   const initialValues = {
