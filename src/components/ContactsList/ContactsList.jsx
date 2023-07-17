@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
-import { List } from './ContactsList.styled';
+import { Button, Data, Item, List, Wrapper } from './ContactsList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectError,
   selectFilteredContacts,
   selectIsLoading,
 } from 'redux/selectors';
-import { fetchContacts } from 'redux/operations';
-import Contact from 'components/Contact/Contact';
-import { Item } from 'components/Contact/Contact.styled';
+import { deleteContacts, fetchContacts } from 'redux/operations';
+import Loading from 'components/Loader/Loading';
 
 const ContactsList = () => {
   const dispatch = useDispatch();
@@ -25,13 +24,24 @@ const ContactsList = () => {
   }
   return (
     <List>
-      {isLoading && <div>Loading...</div>}
       {error && <div>{error}</div>}
-      {contacts.map(contact => (
-        <Item key={contact.id}>
-          <Contact contact={contact} />
-        </Item>
-      ))}
+      {isLoading ? (
+        <Loading>Loading...</Loading>
+      ) : (
+        <>
+          {contacts.map(contact => (
+            <Item key={contact.id}>
+              <Wrapper>
+                <Data>{contact.name}: </Data>
+                <Data>{contact.phone}</Data>
+              </Wrapper>
+              <Button onClick={() => dispatch(deleteContacts(contact.id))}>
+                Remove
+              </Button>
+            </Item>
+          ))}
+        </>
+      )}
     </List>
   );
 };

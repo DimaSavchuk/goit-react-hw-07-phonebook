@@ -10,7 +10,7 @@ export const handleRejected = (state, action) => {
 export const handleFetch = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  state.items.push(action.payload);
+  state.items = action.payload;
 };
 
 export const handleAdd = (state, action) => {
